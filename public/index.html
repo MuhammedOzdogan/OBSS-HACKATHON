@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Control Step Motors</h1>
+<div>
+<label>
+<input type="checkbox" id="forward">
+Forward
+</label></div>
+<hr>
+<div class="checkbox">
+  <label><input type="checkbox" id="backward" value="">Backward</label>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
+<script>
+var socket = io(); //load socket.io-client and connect to the host that serves the page
+window.addEventListener("load", function(){ //when page loads
+  var forward = document.getElementById("forward");
+  var backward = document.getElementById("backward");
+
+  backward.addEventListener("change", function() { //add event listener for when checkbox changes
+    socket.emit("backward", Number(this.checked)); //send button status to server (as 1 or 0)
+  });
+
+  forward.addEventListener("change", function() { //add event listener for when checkbox changes
+    socket.emit("forward", Number(this.checked)); //send button status to server (as 1 or 0)
+  });
+});
+
+
+
+
+</script>
+</html>
+</body>
+</html>
